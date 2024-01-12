@@ -3,7 +3,7 @@ CREATE TABLE Department (
     DepartmentName NVARCHAR(255) NOT NULL
 );
 
-After creating department table  do this
+
 
 CREATE TABLE Employee (
     EmployeeId INT PRIMARY KEY IDENTITY(1,1),
