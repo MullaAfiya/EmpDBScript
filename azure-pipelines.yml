@@ -1,0 +1,26 @@
+name: EmployeeDatabase(Date:yyyyMMdd)$(Rev:.r)
+trigger:
+- main
+pool:
+  name: Default
+
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  steps:
+  - task: UseDotNet@2
+    inputs:
+      version: '3.x'
+      installationPath: $(Agent.ToolsDirectory)/dotnet
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)'
+      Contents: 'dbscript.sql'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'SQLScript'
+      publishLocation: 'Container'
